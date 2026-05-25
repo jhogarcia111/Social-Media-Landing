@@ -12,6 +12,8 @@ import HeroSection from "@/components/HeroSection";
 import ProblemSolutionSection from "@/components/ProblemSolutionSection";
 import PricingSection from "@/components/PricingSection";
 import CTASection from "@/components/CTASection";
+import FAQSection from "@/components/FAQSection";
+import CalendlySection from "@/components/CalendlySection";
 import Footer from "@/components/Footer";
 
 export default function Home() {
@@ -31,9 +33,17 @@ export default function Home() {
         <section id="pricing">
           <PricingSection />
         </section>
-        
+
+        <section id="faq">
+          <FAQSection />
+        </section>
+
         <section id="cta">
           <CTASection />
+        </section>
+
+        <section id="schedule">
+          <CalendlySection />
         </section>
       </main>
       

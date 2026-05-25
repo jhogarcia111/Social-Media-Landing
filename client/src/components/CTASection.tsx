@@ -10,7 +10,7 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Calendar, Mail, Phone, User } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function CTASection() {
   const [formData, setFormData] = useState({
@@ -19,10 +19,25 @@ export default function CTASection() {
     phone: "",
   });
   const [submitted, setSubmitted] = useState(false);
+  const [planPrefill, setPlanPrefill] = useState<string | null>(null);
+
+  useEffect(() => {
+    try {
+      const pre = localStorage.getItem('inquiryPlan');
+      if (pre) setPlanPrefill(pre);
+    } catch {}
+  }, []);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Formulario enviado:", formData);
+    // Send lead to server-side endpoint - keeps email/phone private
+    fetch('/api/lead', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ ...formData, plan: planPrefill }),
+    }).catch(() => {
+      // ignore errors for now
+    });
     setSubmitted(true);
     setTimeout(() => setSubmitted(false), 3000);
   };
@@ -110,6 +125,9 @@ export default function CTASection() {
                 Agendar Mi Consulta Gratuita
               </Button>
 
+              {/* hidden plan indicator */}
+              <input type="hidden" name="plan" value={planPrefill ?? ''} />
+
               <div className="flex flex-wrap justify-center gap-4 pt-4 text-sm text-muted-foreground">
                 <span className="flex items-center gap-1">✓ Sin compromiso</span>
                 <span className="flex items-center gap-1">✓ 30 minutos</span>
@@ -123,18 +141,26 @@ export default function CTASection() {
           <p className="text-muted-foreground">
             ¿Prefieres contactarnos directamente?
           </p>
-          <div className="flex flex-col sm:flex-row justify-center gap-4">
+            <div className="flex flex-col sm:flex-row justify-center gap-4">
             <Button
               variant="outline"
               className="border-[oklch(0.65_0.25_35)] text-[oklch(0.65_0.25_35)] hover:bg-[oklch(0.65_0.25_35)]/10"
-              onClick={() => window.open("https://wa.me/57", "_blank")}
+              onClick={() => {
+                // Scroll to scheduling/Calendly section
+                const el = document.getElementById('schedule');
+                if (el) el.scrollIntoView({ behavior: 'smooth' });
+              }}
             >
               WhatsApp
             </Button>
             <Button
               variant="outline"
               className="border-[oklch(0.55_0.25_260)] text-[oklch(0.55_0.25_260)] hover:bg-[oklch(0.55_0.25_260)]/10"
-              onClick={() => window.open("mailto:contacto@mipuntoenmapa.com")}
+              onClick={() => {
+                // Scroll to contact form
+                const el = document.getElementById('cta');
+                if (el) el.scrollIntoView({ behavior: 'smooth' });
+              }}
             >
               Email
             </Button>
@@ -143,4 +169,11 @@ export default function CTASection() {
       </div>
     </section>
   );
+}
+
+// populate planPrefill from localStorage if present
+// (runs in browser)
+if (typeof window !== 'undefined') {
+  const pre = localStorage.getItem('inquiryPlan');
+  // set via DOM - the component will read on mount
 }

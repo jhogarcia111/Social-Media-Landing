@@ -10,6 +10,7 @@
 
 import { Button } from "@/components/ui/button";
 import { Check, Zap } from "lucide-react";
+import { useState } from "react";
 
 interface PricingPlan {
   name: string;
@@ -86,6 +87,20 @@ const plans: PricingPlan[] = [
 ];
 
 export default function PricingSection() {
+  const [selectedPlan, setSelectedPlan] = useState<PricingPlan | null>(null);
+  const [modalOpen, setModalOpen] = useState(false);
+
+  const openPlanModal = (plan: PricingPlan) => {
+    setSelectedPlan(plan);
+    try { localStorage.setItem('inquiryPlan', plan.name); } catch {}
+    setModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setModalOpen(false);
+    setSelectedPlan(null);
+  };
+
   return (
     <section className="relative py-20 bg-background overflow-hidden">
       {/* Decorative elements */}
@@ -155,6 +170,14 @@ export default function PricingSection() {
                       ? "bg-gradient-to-r from-[oklch(0.65_0.25_35)] to-[oklch(0.6_0.28_20)] hover:shadow-lg hover:shadow-[oklch(0.65_0.25_35)]/50 text-foreground"
                       : "bg-[oklch(0.3_0.02_260)] hover:bg-[oklch(0.35_0.025_260)] text-foreground border border-[oklch(0.65_0.25_35)]/30"
                   }`}
+                  onClick={() => {
+                    if (plan.cta.toLowerCase().includes('elegir')) {
+                      openPlanModal(plan);
+                    } else if (plan.cta.toLowerCase().includes('contact')) {
+                      const el = document.getElementById('cta');
+                      if (el) el.scrollIntoView({ behavior: 'smooth' });
+                    }
+                  }}
                 >
                   {plan.cta}
                 </Button>
@@ -192,6 +215,20 @@ export default function PricingSection() {
           </Button>
         </div>
       </div>
+      {/* Plan chooser modal */}
+      {modalOpen && selectedPlan && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center">
+          <div className="absolute inset-0 bg-black/60" onClick={closeModal} />
+          <div className="relative bg-background p-6 rounded-xl w-full max-w-md border border-[oklch(0.3_0.02_260)]">
+            <h3 className="text-xl font-bold mb-4">¿Qué quieres hacer con {selectedPlan.name}?</h3>
+            <div className="space-y-3">
+              <button className="w-full py-3 bg-gradient-to-r from-[oklch(0.65_0.25_35)] to-[oklch(0.6_0.28_20)] rounded-lg text-foreground font-semibold" onClick={() => window.open('https://calendly.com/mipuntoenelmapa/30min', '_blank')}>Comenzar ahora (agendar)</button>
+              <button className="w-full py-3 border rounded-lg text-foreground" onClick={() => { const el = document.getElementById('cta'); if (el) el.scrollIntoView({ behavior: 'smooth' }); closeModal(); }}>Quiero saber más (contactarme)</button>
+              <button className="w-full py-2 text-sm text-muted-foreground" onClick={closeModal}>Cerrar</button>
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   );
 }

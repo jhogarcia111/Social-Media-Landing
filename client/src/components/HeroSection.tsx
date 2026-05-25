@@ -105,7 +105,8 @@ export default function HeroSection() {
                 </>
               ) : (
                 <div
-                  className="relative w-full aspect-video bg-gradient-to-br from-[oklch(0.2_0.015_260)] to-[oklch(0.15_0.01_260)] flex items-center justify-center cursor-pointer group"
+                  className="relative w-full aspect-video bg-gradient-to-br from-[oklch(0.2_0.015_260)] to-[oklch(0.15_0.01_260)] flex items-center justify-center cursor-pointer group bg-cover bg-center"
+                  style={{ backgroundImage: `url(https://img.youtube.com/vi/JDeZj0OlmQA/maxresdefault.jpg)` }}
                   onClick={() => setVideoOpen(true)}
                 >
                   {/* Thumbnail placeholder */}

@@ -82,24 +82,11 @@ export default function Footer() {
 
           <div className="space-y-4">
             <h3 className="font-semibold text-foreground">Contacto</h3>
-            <ul className="space-y-3 text-sm">
-              <li className="flex items-center gap-2 text-muted-foreground">
-                <Mail className="h-4 w-4 text-[oklch(0.65_0.25_35)]" />
-                <a href="mailto:contacto@mipuntoenmapa.com" className="hover:text-[oklch(0.65_0.25_35)] transition-colors">
-                  contacto@mipuntoenmapa.com
-                </a>
-              </li>
-              <li className="flex items-center gap-2 text-muted-foreground">
-                <Phone className="h-4 w-4 text-[oklch(0.65_0.25_35)]" />
-                <a href="https://wa.me/57" className="hover:text-[oklch(0.65_0.25_35)] transition-colors">
-                  WhatsApp
-                </a>
-              </li>
-              <li className="flex items-center gap-2 text-muted-foreground">
-                <MapPin className="h-4 w-4 text-[oklch(0.65_0.25_35)]" />
-                <span>Colombia</span>
-              </li>
-            </ul>
+            <p className="text-sm text-muted-foreground">Usa el formulario de contacto o agenda directamente una consulta.</p>
+            <div className="flex gap-3">
+              <a href="#cta" className="text-sm text-muted-foreground hover:text-[oklch(0.65_0.25_35)] transition-colors">Formulario</a>
+              <a href="#schedule" className="text-sm text-muted-foreground hover:text-[oklch(0.65_0.25_35)] transition-colors">Agendar</a>
+            </div>
           </div>
         </div>
 
