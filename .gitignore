@@ -3,7 +3,10 @@
 .pnpm-store/
 
 # Build outputs
-dist/
+# Ignore all top-level dist contents but allow specific output folders to be tracked (e.g. dist/public)
+dist/*
+!dist/public/
+!dist/public/**
 build/
 *.dist
 

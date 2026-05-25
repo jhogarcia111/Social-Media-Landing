@@ -1,0 +1,20 @@
+deployment:
+  tasks:
+    - export NODE_ENV=production
+    - |
+      # Install and build. Prefer pnpm if available, otherwise fallback to npm
+      if command -v pnpm >/dev/null 2>&1; then
+        pnpm install --frozen-lockfile
+        pnpm run build
+      else
+        npm ci
+        npm run build
+      fi
+    - |
+      # Copy built static files to the deployment directory if cPanel provides it
+      if [ -n "$DEPLOYMENT_DIR" ]; then
+        mkdir -p "$DEPLOYMENT_DIR"
+        cp -r dist/public/* "$DEPLOYMENT_DIR/"
+      else
+        echo "Warning: DEPLOYMENT_DIR is not set. Built files are in dist/public/."
+      fi

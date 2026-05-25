@@ -133,6 +133,35 @@ NEVER use external map libraries or request API keys from users - the Manus prox
 
 ---
 
+## 📦 Despliegue en cPanel (resumen rápido)
+
+- **Carpeta de salida de producción:** `dist/public/` (generada por `vite build`).
+- **Asegúrate** de que `dist/public/` esté incluido en el repositorio (hemos actualizado `.gitignore`).
+- **Pasos locales:**
+
+```bash
+# Instala dependencias
+pnpm install
+
+# Compila los assets (genera dist/public/)
+pnpm run build
+
+# Confirma que los archivos estáticos están en dist/public/
+ls -la dist/public
+```
+
+- **En cPanel (opciones):**
+  - Usar *Git Version Control* en cPanel apuntando al repositorio y configurar un despliegue automático.
+  - Nuestro archivo `.cpanel.yml` ejecuta la compilación y copia `dist/public/*` al directorio de despliegue (`$DEPLOYMENT_DIR`) si cPanel lo proporciona.
+  - También incluimos un `.htaccess` en `client/public/` para que Vite lo copie a `dist/public/` y habilite el fallback SPA (sirve `index.html` en rutas no encontradas).
+
+- **Si ves "Index of /" en el navegador:**
+  - Asegúrate de que los archivos estáticos estén presentes en el Document Root del subdominio (p.ej. `public_html/subdomain/`).
+  - Si usas el despliegue automático de cPanel, revisa los logs de despliegue en la interfaz de Git y confirma que el paso `pnpm run build` finaliza correctamente y que `dist/public` se copió.
+
+
+---
+
 ## Core File References
 
 `package.json`
