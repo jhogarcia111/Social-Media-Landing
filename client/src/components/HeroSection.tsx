@@ -26,7 +26,7 @@ export default function HeroSection() {
           {/* Contenido de texto */}
           <div className="space-y-8 animate-slide-in-left">
             <div className="space-y-4">
-              <h1 className="text-5xl lg:text-6xl font-space-grotesk font-bold text-foreground leading-tight">
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-space-grotesk font-bold text-foreground leading-tight">
                 Multiplica tus{" "}
                 <span className="bg-gradient-to-r from-[oklch(0.65_0.25_35)] to-[oklch(0.6_0.28_20)] bg-clip-text text-transparent">
                   Ventas en Redes

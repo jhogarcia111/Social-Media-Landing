@@ -57,7 +57,7 @@ export default function CTASection() {
           </p>
         </div>
 
-        <div className="relative p-12 rounded-2xl bg-gradient-to-br from-[oklch(0.2_0.015_260)] to-[oklch(0.15_0.01_260)] border-2 border-[oklch(0.65_0.25_35)]/30 overflow-hidden">
+        <div className="relative p-6 sm:p-12 rounded-2xl bg-gradient-to-br from-[oklch(0.2_0.015_260)] to-[oklch(0.15_0.01_260)] border-2 border-[oklch(0.65_0.25_35)]/30 overflow-hidden">
           <div className="absolute -top-20 -right-20 w-64 h-64 bg-[oklch(0.65_0.25_35)] rounded-full opacity-5 blur-3xl" />
 
           {submitted ? (
