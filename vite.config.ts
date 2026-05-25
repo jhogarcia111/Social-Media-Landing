@@ -205,6 +205,28 @@ function vitePluginStorageProxy(): Plugin {
 
 const plugins = [react(), tailwindcss(), jsxLocPlugin(), vitePluginManusRuntime(), vitePluginManusDebugCollector(), vitePluginStorageProxy()];
 
+// Ensure a base tag is injected so builds served from subdirectories resolve assets correctly
+function vitePluginInjectBase(): Plugin {
+  return {
+    name: 'inject-base-href',
+    transformIndexHtml(html) {
+      return {
+        html,
+        tags: [
+          {
+            tag: 'base',
+            attrs: { href: './' },
+            injectTo: 'head-prepend',
+          },
+        ],
+      };
+    },
+  };
+}
+
+// append base injection plugin to plugins list
+plugins.push(vitePluginInjectBase());
+
 export default defineConfig({
   // Use relative paths so the build can be served from a subdirectory
   base: "./",

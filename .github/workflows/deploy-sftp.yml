@@ -1,0 +1,54 @@
+name: Build and deploy to cPanel via SFTP
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build_and_deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Enable Corepack (pnpm)
+        run: |
+          corepack enable
+          corepack prepare pnpm@latest --activate
+
+      - name: Install dependencies
+        run: |
+          if command -v pnpm >/dev/null 2>&1; then
+            pnpm install --frozen-lockfile
+          else
+            npm ci
+          fi
+
+      - name: Build
+        run: |
+          if command -v pnpm >/dev/null 2>&1; then
+            pnpm run build
+          else
+            npm run build
+          fi
+
+      - name: Upload built files via SFTP
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.SFTP_HOST }}
+          username: ${{ secrets.SFTP_USER }}
+          password: ${{ secrets.SFTP_PASSWORD }}
+          port: ${{ secrets.SFTP_PORT }}
+          source: "dist/public/*"
+          target: ${{ secrets.SFTP_PATH }}
+
+      - name: Purge cPanel Git deployment metadata (optional)
+        if: ${{ secrets.SFTP_RUN_POSTCMD == 'true' }}
+        run: |
+          # Optional: touch a file to trigger cPanel metadata refresh or run remote command via SSH if configured
+          echo "Deployed via GitHub Actions SFTP"
