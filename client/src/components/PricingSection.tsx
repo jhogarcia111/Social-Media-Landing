@@ -108,8 +108,12 @@ export default function PricingSection() {
           {plans.map((plan, idx) => (
             <div
               key={idx}
-              className={`relative rounded-2xl overflow-hidden transition-all duration-300 hover:shadow-2xl ${
-                plan.highlighted ? "md:scale-105 md:shadow-2xl shadow-xl" : "hover:shadow-lg"
+              className={`relative rounded-2xl transition-all duration-300 hover:shadow-2xl ${{
+                true: "",
+              }[""]} ${
+                plan.highlighted
+                  ? "md:scale-105 md:shadow-2xl shadow-xl overflow-visible"
+                  : "hover:shadow-lg overflow-hidden"
               }`}
               style={{ animationDelay: `${idx * 150}ms` }}
             >
@@ -120,8 +124,8 @@ export default function PricingSection() {
               <div className={`absolute inset-0 border-2 ${plan.accentColor} rounded-2xl`} />
 
               {/* Highlight badge */}
-              {plan.highlighted && (
-                <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-20">
+                {plan.highlighted && (
+                <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-30">
                   <div className="bg-gradient-to-r from-[oklch(0.65_0.25_35)] to-[oklch(0.6_0.28_20)] px-6 py-2 rounded-full flex items-center gap-2 shadow-lg">
                     <Zap className="h-4 w-4 text-foreground" />
                     <span className="text-sm font-bold text-foreground">MÁS POPULAR</span>

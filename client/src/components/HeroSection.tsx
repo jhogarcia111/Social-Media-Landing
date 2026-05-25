@@ -81,16 +81,28 @@ export default function HeroSection() {
             {/* Video Container */}
             <div className="relative rounded-2xl overflow-hidden shadow-2xl border border-[oklch(0.3_0.02_260)]">
               {videoOpen ? (
-                <iframe
-                  width="100%"
-                  height="500"
-                  src="https://www.youtube.com/embed/JDeZj0OlmQA?autoplay=1"
-                  title="Mi Punto en el Mapa - Gestión de Redes Sociales"
-                  frameBorder="0"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                  className="w-full aspect-video"
-                />
+                <>
+                  <iframe
+                    width="100%"
+                    height="500"
+                    src="https://www.youtube-nocookie.com/embed/JDeZj0OlmQA?start=10&autoplay=1"
+                    title="Mi Punto en el Mapa - Gestión de Redes Sociales"
+                    frameBorder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                    className="w-full aspect-video"
+                  />
+                  <div className="mt-2 text-center">
+                    <a
+                      href="https://www.youtube.com/watch?v=JDeZj0OlmQA&t=10s"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-sm text-muted-foreground underline"
+                    >
+                      Abrir en YouTube
+                    </a>
+                  </div>
+                </>
               ) : (
                 <div
                   className="relative w-full aspect-video bg-gradient-to-br from-[oklch(0.2_0.015_260)] to-[oklch(0.15_0.01_260)] flex items-center justify-center cursor-pointer group"

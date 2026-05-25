@@ -12,8 +12,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
-    <script type="module" crossorigin src="./assets/index-D4Hat84g.js"></script>
-    <link rel="stylesheet" crossorigin href="./assets/index-Bp8JwDbD.css">
+    <script type="module" crossorigin src="./assets/index-UBPqLpXc.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-w8PvWOy-.css">
   </head>
 
   <body>
@@ -78,10 +78,25 @@ Error generating stack: `+l.message+`
 </script>
 
     <div id="root"></div>
-    <script
-      defer
-      src="%VITE_ANALYTICS_ENDPOINT%/umami"
-      data-website-id="%VITE_ANALYTICS_WEBSITE_ID%"></script>
+    <script>
+      (function () {
+        // Safe injection for analytics script: only append if build-time vars were replaced
+        const endpoint = "%VITE_ANALYTICS_ENDPOINT%";
+        const websiteId = "%VITE_ANALYTICS_WEBSITE_ID%";
+        if (
+          endpoint &&
+          websiteId &&
+          !endpoint.includes("%VITE_ANALYTICS_ENDPOINT%") &&
+          !websiteId.includes("%VITE_ANALYTICS_WEBSITE_ID%")
+        ) {
+          var s = document.createElement("script");
+          s.defer = true;
+          s.src = endpoint.replace(/\/+$/, "") + "/umami";
+          s.setAttribute("data-website-id", websiteId);
+          document.head.appendChild(s);
+        }
+      })();
+    </script>
   </body>
 
 </html>

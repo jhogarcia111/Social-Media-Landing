@@ -17,10 +17,25 @@
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
-    <script
-      defer
-      src="%VITE_ANALYTICS_ENDPOINT%/umami"
-      data-website-id="%VITE_ANALYTICS_WEBSITE_ID%"></script>
+    <script>
+      (function () {
+        // Safe injection for analytics script: only append if build-time vars were replaced
+        const endpoint = "%VITE_ANALYTICS_ENDPOINT%";
+        const websiteId = "%VITE_ANALYTICS_WEBSITE_ID%";
+        if (
+          endpoint &&
+          websiteId &&
+          !endpoint.includes("%VITE_ANALYTICS_ENDPOINT%") &&
+          !websiteId.includes("%VITE_ANALYTICS_WEBSITE_ID%")
+        ) {
+          var s = document.createElement("script");
+          s.defer = true;
+          s.src = endpoint.replace(/\/+$/, "") + "/umami";
+          s.setAttribute("data-website-id", websiteId);
+          document.head.appendChild(s);
+        }
+      })();
+    </script>
   </body>
 
 </html>
