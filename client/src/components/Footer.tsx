@@ -18,9 +18,11 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
           <div className="space-y-4">
             <div className="flex items-center gap-2">
-              <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[oklch(0.65_0.25_35)] to-[oklch(0.6_0.28_20)] flex items-center justify-center">
-                <span className="text-foreground font-bold text-lg">M</span>
-              </div>
+              <img 
+                src="/logo.png" 
+                alt="Mi Punto en el Mapa Logo" 
+                className="w-10 h-10 object-contain rounded-full border border-[oklch(0.65_0.25_35)]/20 shadow-md"
+              />
               <span className="font-space-grotesk font-bold text-foreground">Mi Punto en el Mapa</span>
             </div>
             <p className="text-sm text-muted-foreground">

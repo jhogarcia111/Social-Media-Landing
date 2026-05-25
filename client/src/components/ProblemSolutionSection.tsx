@@ -8,18 +8,31 @@
  */
 
 import { CheckCircle2, AlertCircle, TrendingUp, Zap } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 const problems = [
   {
     icon: AlertCircle,
-    title: "¿Cansado de intentar?",
-    description: "Manejar redes sociales sin ver resultados es frustrante y consume tiempo valioso.",
+    title: "Falta de tiempo y enfoque",
+    description: "Diseñar publicaciones, escribir copys persuasivos, programar posts y editar videos te consume horas valiosas que deberías usar para atender a tus clientes.",
     color: "text-[oklch(0.6_0.28_20)]",
   },
   {
     icon: AlertCircle,
-    title: "Costo y tiempo",
-    description: "Piensas que es muy caro o que no tienes tiempo para hacerlo bien.",
+    title: "Inconsistencia constante",
+    description: "Publicar solo cuando te acuerdas da una imagen de negocio abandonado. Tu competencia consistente se queda con la atención y los clientes.",
+    color: "text-[oklch(0.6_0.28_20)]",
+  },
+  {
+    icon: AlertCircle,
+    title: "Likes que no pagan las cuentas",
+    description: "Tener seguidores o conseguir 'me gusta' de amigos es fácil, pero no se traduce en mensajes de compra, cotizaciones reales ni en ventas efectivas.",
+    color: "text-[oklch(0.6_0.28_20)]",
+  },
+  {
+    icon: AlertCircle,
+    title: "La pesadilla de editar Reels/TikTok",
+    description: "Sabes que el video vertical es la clave para crecer, pero no sabes qué grabar, cómo editar con subtítulos dinámicos ni qué música usar.",
     color: "text-[oklch(0.6_0.28_20)]",
   },
 ];
@@ -27,25 +40,35 @@ const problems = [
 const solutions = [
   {
     icon: CheckCircle2,
-    title: "Acompañamiento adecuado",
-    description: "Solo necesitas el apoyo correcto. Nosotros nos encargamos de todo.",
+    title: "Consistencia 100% manos libres",
+    description: "Nosotros planificamos, diseñamos, escribimos y publicamos todo por ti de forma puntual. Tu marca se mantiene activa de manera profesional sin que muevas un dedo.",
     color: "text-[oklch(0.65_0.25_35)]",
   },
   {
     icon: Zap,
-    title: "Contenido + Estrategia",
-    description: "Publicaciones consistentes, gestión de comunidad y estrategia de crecimiento.",
+    title: "Diseño premium e identidad visual",
+    description: "Olvídate de las plantillas genéricas de Canva. Diseñamos piezas personalizadas que elevan tu marca y te diferencian instantáneamente del resto del mercado.",
     color: "text-[oklch(0.65_0.25_35)]",
   },
   {
     icon: TrendingUp,
-    title: "Resultados reales",
-    description: "Crecimiento medible, engagement auténtico y conversiones que importan.",
+    title: "Contenido de conversión y embudos",
+    description: "Estrategias de contenido orientadas a generar conversaciones: transformamos visualizaciones casuales en mensajes directos (DMs) listos para comprar.",
+    color: "text-[oklch(0.65_0.25_35)]",
+  },
+  {
+    icon: CheckCircle2,
+    title: "Edición profesional de video vertical",
+    description: "Te damos los guiones estructurados listos para grabar y editamos tus videos de forma dinámica (efectos, títulos dinámicos y música en tendencia) para retener la atención.",
     color: "text-[oklch(0.65_0.25_35)]",
   },
 ];
 
 export default function ProblemSolutionSection() {
+  const triggerCTA = () => {
+    window.dispatchEvent(new CustomEvent("open-cta-modal", { detail: { planName: "Consulta Gratuita (Pain Points)" } }));
+  };
+
   return (
     <section className="relative py-20 bg-background overflow-hidden">
       {/* Decorative background elements */}
@@ -56,10 +79,10 @@ export default function ProblemSolutionSection() {
         {/* Header */}
         <div className="text-center mb-16 space-y-4">
           <h2 className="text-4xl lg:text-5xl font-space-grotesk font-bold text-foreground">
-            El Problema y la Solución
+            Los Problemas vs. Nuestra Solución
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Entendemos tus desafíos. Por eso creamos una solución integral que funciona.
+            ¿Te sientes identificado con alguno de estos dolores de cabeza? Esto es lo que haremos por ti.
           </p>
         </div>
 
@@ -68,7 +91,7 @@ export default function ProblemSolutionSection() {
           {/* Problems Column */}
           <div className="space-y-6">
             <h3 className="text-2xl font-space-grotesk font-bold text-[oklch(0.6_0.28_20)]">
-              Los Problemas
+              El Estado Actual (Pain Points)
             </h3>
             <div className="space-y-4">
               {problems.map((problem, idx) => {
@@ -95,7 +118,7 @@ export default function ProblemSolutionSection() {
           {/* Solutions Column */}
           <div className="space-y-6">
             <h3 className="text-2xl font-space-grotesk font-bold text-[oklch(0.65_0.25_35)]">
-              Nuestra Solución
+              La Solución Con Nosotros
             </h3>
             <div className="space-y-4">
               {solutions.map((solution, idx) => {
@@ -123,16 +146,27 @@ export default function ProblemSolutionSection() {
         {/* Key Benefit */}
         <div className="relative p-8 rounded-2xl bg-gradient-to-r from-[oklch(0.65_0.25_35)]/15 to-[oklch(0.55_0.25_260)]/15 border border-[oklch(0.65_0.25_35)]/30 overflow-hidden">
           <div className="absolute -top-10 -right-10 w-40 h-40 bg-[oklch(0.65_0.25_35)] rounded-full opacity-10 blur-3xl" />
-          <div className="relative z-10">
-            <h3 className="text-2xl font-space-grotesk font-bold text-foreground mb-4">
-              ✨ Lo Mejor de Todo
-            </h3>
-            <p className="text-lg text-muted-foreground mb-6">
-              Una <span className="text-[oklch(0.65_0.25_35)] font-semibold">primera consulta gratuita</span> para que veas exactamente cómo trabajamos, sin compromiso alguno.
-            </p>
-            <p className="text-base text-muted-foreground">
-              Agenda hoy mismo tu cita y descubre lo que podemos hacer por tu negocio. Haz clic en el enlace abajo y comienza tu transformación digital.
-            </p>
+          <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-8">
+            <div className="flex-1">
+              <h3 className="text-2xl font-space-grotesk font-bold text-foreground mb-4">
+                ✨ Lo Mejor de Todo
+              </h3>
+              <p className="text-lg text-muted-foreground mb-4">
+                Una <span className="text-[oklch(0.65_0.25_35)] font-semibold">primera consulta 100% gratuita</span> para evaluar tu perfil de redes sociales y darte recomendaciones iniciales accionables, sin compromiso alguno.
+              </p>
+              <p className="text-sm text-muted-foreground">
+                Descubre cómo podemos automatizar y optimizar tus redes sociales hoy. No pierdes nada con preguntar y puedes ganar un plan estratégico claro.
+              </p>
+            </div>
+            <div className="flex-shrink-0 w-full md:w-auto">
+              <Button
+                size="lg"
+                onClick={triggerCTA}
+                className="w-full md:w-auto bg-gradient-to-r from-[oklch(0.65_0.25_35)] to-[oklch(0.6_0.28_20)] hover:shadow-lg hover:shadow-[oklch(0.65_0.25_35)]/50 text-foreground font-bold py-6 px-8 rounded-xl shadow-lg border border-[oklch(0.65_0.25_35)] animate-glow"
+              >
+                Agendar Mi Consulta Gratuita
+              </Button>
+            </div>
           </div>
         </div>
       </div>

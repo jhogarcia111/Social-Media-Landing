@@ -7,6 +7,7 @@
  * - Animaciones y transiciones suaves
  */
 
+import { useState, useEffect } from "react";
 import Header from "@/components/Header";
 import HeroSection from "@/components/HeroSection";
 import ProblemSolutionSection from "@/components/ProblemSolutionSection";
@@ -15,8 +16,25 @@ import CTASection from "@/components/CTASection";
 import FAQSection from "@/components/FAQSection";
 import CalendlySection from "@/components/CalendlySection";
 import Footer from "@/components/Footer";
+import CTAModal from "@/components/CTAModal";
 
 export default function Home() {
+  const [modalOpen, setModalOpen] = useState(false);
+  const [planName, setPlanName] = useState<string | null>(null);
+
+  useEffect(() => {
+    const handleOpenModal = (e: Event) => {
+      const customEvent = e as CustomEvent<{ planName?: string }>;
+      setPlanName(customEvent.detail?.planName || null);
+      setModalOpen(true);
+    };
+
+    window.addEventListener("open-cta-modal", handleOpenModal);
+    return () => {
+      window.removeEventListener("open-cta-modal", handleOpenModal);
+    };
+  }, []);
+
   return (
     <div className="min-h-screen bg-background text-foreground">
       <Header />
@@ -48,6 +66,12 @@ export default function Home() {
       </main>
       
       <Footer />
+
+      <CTAModal 
+        isOpen={modalOpen} 
+        onClose={() => setModalOpen(false)} 
+        planName={planName}
+      />
     </div>
   );
 }

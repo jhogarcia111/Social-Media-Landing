@@ -25,9 +25,11 @@ export default function Header() {
     <header className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-[oklch(0.3_0.02_260)]">
       <div className="container max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[oklch(0.65_0.25_35)] to-[oklch(0.6_0.28_20)] flex items-center justify-center">
-            <span className="text-foreground font-bold text-lg">M</span>
-          </div>
+          <img 
+            src="/logo.png" 
+            alt="Mi Punto en el Mapa Logo" 
+            className="w-10 h-10 object-contain rounded-full border border-[oklch(0.65_0.25_35)]/20 shadow-md"
+          />
           <span className="font-space-grotesk font-bold text-foreground hidden sm:inline">
             Mi Punto en el Mapa
           </span>
@@ -46,7 +48,10 @@ export default function Header() {
         </nav>
 
         <div className="hidden md:block">
-          <Button className="bg-gradient-to-r from-[oklch(0.65_0.25_35)] to-[oklch(0.6_0.28_20)] hover:shadow-lg hover:shadow-[oklch(0.65_0.25_35)]/50 text-foreground font-semibold">
+          <Button 
+            className="bg-gradient-to-r from-[oklch(0.65_0.25_35)] to-[oklch(0.6_0.28_20)] hover:shadow-lg hover:shadow-[oklch(0.65_0.25_35)]/50 text-foreground font-semibold"
+            onClick={() => window.dispatchEvent(new CustomEvent("open-cta-modal", { detail: { planName: "Consulta Inicial" } }))}
+          >
             Agendar Consulta
           </Button>
         </div>
@@ -76,7 +81,13 @@ export default function Header() {
                 {item.label}
               </a>
             ))}
-            <Button className="w-full bg-gradient-to-r from-[oklch(0.65_0.25_35)] to-[oklch(0.6_0.28_20)] hover:shadow-lg hover:shadow-[oklch(0.65_0.25_35)]/50 text-foreground font-semibold mt-4">
+            <Button 
+              className="w-full bg-gradient-to-r from-[oklch(0.65_0.25_35)] to-[oklch(0.6_0.28_20)] hover:shadow-lg hover:shadow-[oklch(0.65_0.25_35)]/50 text-foreground font-semibold mt-4"
+              onClick={() => {
+                setMobileMenuOpen(false);
+                window.dispatchEvent(new CustomEvent("open-cta-modal", { detail: { planName: "Consulta Inicial" } }));
+              }}
+            >
               Agendar Consulta
             </Button>
           </nav>

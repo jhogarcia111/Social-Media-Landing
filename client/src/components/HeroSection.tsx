@@ -42,6 +42,7 @@ export default function HeroSection() {
               <Button
                 size="lg"
                 className="bg-gradient-to-r from-[oklch(0.65_0.25_35)] to-[oklch(0.6_0.28_20)] hover:shadow-lg hover:shadow-[oklch(0.65_0.25_35)]/50 text-foreground font-semibold animate-glow"
+                onClick={() => window.dispatchEvent(new CustomEvent("open-cta-modal", { detail: { planName: "Consulta Gratuita" } }))}
               >
                 Agendar Consulta Gratuita
                 <ArrowRight className="ml-2 h-5 w-5" />
@@ -50,6 +51,7 @@ export default function HeroSection() {
                 variant="outline"
                 size="lg"
                 className="border-[oklch(0.65_0.25_35)] text-[oklch(0.65_0.25_35)] hover:bg-[oklch(0.65_0.25_35)]/10"
+                onClick={() => document.getElementById("pricing")?.scrollIntoView({ behavior: "smooth" })}
               >
                 Ver Planes
               </Button>
